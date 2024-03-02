@@ -1,13 +1,10 @@
 .container {
-  background-color: rgba(0, 0, 0, 0.5);
-  border-bottom: 2px solid rgba(255, 255, 255, 0.5);
-  font-size: 25px;
+  font-size: 45px;
   text-align: center;
-  padding: 15px;
-  padding-bottom: 20px;
   text-decoration: underline;
-}
-
-.title {
-  color: rgb(220, 0, 0);
+  text-transform: uppercase;
+  text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
+  font-weight: 700;
+  padding: 10px;
+  padding-bottom: 0px;
 }

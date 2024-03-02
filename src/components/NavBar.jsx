@@ -5,8 +5,15 @@ export default function NavBar() {
   return (
     <div>
       <nav className={navbarStyles.container}>
-        <Link href="/">Home</Link>
-        <Link href="/about">About</Link>
+        <Link className="button" href="/">
+          Home
+        </Link>
+        <Link className="button" href="/games">
+          Games
+        </Link>
+        <Link className="button" href="/about">
+          About
+        </Link>
       </nav>
     </div>
   );

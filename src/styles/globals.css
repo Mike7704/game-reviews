@@ -17,8 +17,8 @@
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+  background: linear-gradient(90deg, #a00000, #c62128);
+  color: white;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -30,9 +30,68 @@ body {
   }
 }
 
+.background-overlay {
+  background-image: url("/images/background-overlay.png");
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  opacity: 0.12;
+}
+
 .page-content {
   display: flex;
   flex-direction: column;
   align-items: center;
   flex: 1;
+  background-color: rgba(0, 0, 0, 0.3);
+  border: 2px solid white;
+  border-radius: 8px;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.heading {
+  font-size: 30px;
+  font-weight: 700;
+  text-decoration: underline;
+  text-align: center;
+  text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
+  padding: 20px;
+}
+
+.subheading {
+  font-size: 25px;
+  font-weight: 700;
+  text-decoration: underline;
+  text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
+}
+
+.button {
+  background-color: rgb(159, 0, 0, 0.5);
+  border: 2px solid white;
+  border-radius: 8px;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  font-size: 18px;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
+  min-width: 110px;
+  padding: 5px 20px 5px 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.button:hover {
+  background-color: rgba(255, 0, 0, 0.5);
+}
+
+p,
+li {
+  font-size: 18px;
+  text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
 }
