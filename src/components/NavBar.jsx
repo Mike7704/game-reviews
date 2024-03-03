@@ -11,8 +11,8 @@ export default function NavBar() {
         <Link className="button" href="/games">
           Games
         </Link>
-        <Link className="button" href="/about">
-          About
+        <Link className="button" href="/addGame">
+          Add Game
         </Link>
       </nav>
     </div>

@@ -2,20 +2,34 @@ import { sql } from "@vercel/postgres";
 import Link from "next/link";
 import Image from "next/image";
 import gamesStyles from "@/styles/games.module.css";
+import DeleteReviewButton from "@/components/DeleteReviewButton";
 
 export default async function Reviews({ params }) {
   const game = await sql`
-      SELECT * FROM games WHERE id = ${params.id}
-      ;`;
+    SELECT * FROM games WHERE id = ${params.id}
+  ;`;
 
   const reviews = await sql`
-  SELECT * FROM reviews WHERE game_id = ${params.id}
+    SELECT * FROM reviews WHERE game_id = ${params.id}
   ;`;
 
   let averageRating = await sql`
-  SELECT ROUND(AVG(rating), 1) AS average_rating FROM reviews WHERE game_id = ${params.id}
+    SELECT ROUND(AVG(rating), 1) AS average_rating FROM reviews WHERE game_id = ${params.id}
   ;`;
 
+  // Check if game with given ID exists
+  if (game.rows[0] === null || game.rows[0] === undefined) {
+    return (
+      <div className="page-content">
+        <h1 className="heading">Game Not Found</h1>
+        <Link className="button" href={`/games`}>
+          Back
+        </Link>
+      </div>
+    );
+  }
+
+  // Check if there are any reviews to display an average
   if (averageRating.rows[0].average_rating === null) {
     averageRating = "No reviews available";
   } else {
@@ -50,6 +64,7 @@ export default async function Reviews({ params }) {
               <li>{review.review}</li>
               <li>Rating: {review.rating} / 10</li>
               <li>{review.created_at.toLocaleString("en-GB")}</li>
+              <DeleteReviewButton reviewID={review.id} />
             </div>
           ))
         )}
