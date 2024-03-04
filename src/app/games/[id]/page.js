@@ -67,7 +67,7 @@ export default async function Reviews({ params }) {
               <div className={gameStyles.review_buttons_container}>
                 <Link
                   className={`button ${gameStyles.button}`}
-                  href={`/games/${params.id}/editReview?reviewID=${review.id}&title=${game.rows[0].title}`}
+                  href={`/games/${params.id}/addReview?edit=true&reviewID=${review.id}&title=${game.rows[0].title}`}
                 >
                   Edit
                 </Link>
@@ -77,7 +77,7 @@ export default async function Reviews({ params }) {
           ))
         )}
       </ul>
-      <Link className={`button ${gameStyles.review_button}`} href={`/games/${params.id}/addReview?title=${game.rows[0].title}`}>
+      <Link className={`button ${gameStyles.review_button}`} href={`/games/${params.id}/addReview?edit=false&title=${game.rows[0].title}`}>
         Add a Review
       </Link>
       <Link className="button" href={`/games`}>

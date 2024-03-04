@@ -26,8 +26,14 @@ export default async function AddReview({ searchParams, params }) {
     const review = formData.get("review");
     const rating = formData.get("rating");
 
+    // Update review
+    if (searchParams.edit === `true`) {
+      await sql`UPDATE reviews SET review = ${review}, rating = ${rating} WHERE id = ${searchParams.reviewID}`;
+    }
     // Insert new review
-    await sql`INSERT INTO reviews (game_id, review, rating) VALUES (${params.id}, ${review}, ${rating})`;
+    else {
+      await sql`INSERT INTO reviews (game_id, review, rating) VALUES (${params.id}, ${review}, ${rating})`;
+    }
 
     // Revalidate the games page to fetch most recent data
     revalidatePath(`/games/${params.id}`);
