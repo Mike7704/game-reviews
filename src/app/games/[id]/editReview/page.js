@@ -6,15 +6,15 @@ import formStyles from "@/styles/form.module.css";
 import FormSubmitButton from "@/components/FormSubmitButton";
 import RatingSelect from "@/components/RatingSelect";
 
-export default async function AddReview({ searchParams, params }) {
+export default async function EditReview({ searchParams, params }) {
   let gameTitle = searchParams.title;
 
   // No title searchParam so search the database
   if (!gameTitle) {
     gameTitle = (
       await sql`
-      SELECT title FROM games WHERE id = ${params.id}
-    ;`
+        SELECT title FROM games WHERE id = ${params.id}
+      ;`
     ).rows[0].title;
   }
 
@@ -26,8 +26,8 @@ export default async function AddReview({ searchParams, params }) {
     const review = formData.get("review");
     const rating = formData.get("rating");
 
-    // Insert new review
-    await sql`INSERT INTO reviews (game_id, review, rating) VALUES (${params.id}, ${review}, ${rating})`;
+    // Update review
+    await sql`UPDATE reviews SET review = ${review}, rating = ${rating} WHERE id = ${searchParams.reviewID}`;
 
     // Revalidate the games page to fetch most recent data
     revalidatePath(`/games/${params.id}`);

@@ -1,7 +1,7 @@
 import { sql } from "@vercel/postgres";
 import Link from "next/link";
 import Image from "next/image";
-import gamesStyles from "@/styles/games.module.css";
+import gameStyles from "@/styles/game.module.css";
 import DeleteReviewButton from "@/components/DeleteReviewButton";
 
 export default async function Reviews({ params }) {
@@ -39,9 +39,9 @@ export default async function Reviews({ params }) {
   return (
     <div className="page-content">
       <h1 className="heading">{game.rows[0].title}</h1>
-      <div className={gamesStyles.game_container}>
-        <Image className={gamesStyles.game_cover} src={game.rows[0].cover_image} width={300} height={450} alt="Game Cover" />
-        <div className={gamesStyles.game_info_container}>
+      <div className={gameStyles.game_container}>
+        <Image className={gameStyles.game_cover} src={game.rows[0].cover_image} width={300} height={450} alt="Game Cover" />
+        <div className={gameStyles.game_info_container}>
           <h2 className="subheading">Description:</h2>
           <p>{game.rows[0].description}</p>
           <h2 className="subheading">Release Date:</h2>
@@ -52,24 +52,32 @@ export default async function Reviews({ params }) {
           <p>{averageRating}</p>
         </div>
       </div>
-      <h2 className={`subheading ${gamesStyles.review_heading}`}>Reviews:</h2>
-      <ul className={gamesStyles.reviews_container}>
+      <h2 className={`subheading ${gameStyles.review_heading}`}>Reviews:</h2>
+      <ul className={gameStyles.reviews_container}>
         {reviews.rows.length === 0 ? (
-          <div className={gamesStyles.review}>
+          <div className={gameStyles.review}>
             <li>No reviews available</li>
           </div>
         ) : (
           reviews.rows.map((review) => (
-            <div className={gamesStyles.review} key={review.id}>
-              <li>{review.review}</li>
+            <div className={gameStyles.review} key={review.id}>
               <li>Rating: {review.rating} / 10</li>
-              <li>{review.created_at.toLocaleString("en-GB")}</li>
-              <DeleteReviewButton reviewID={review.id} />
+              <li>Review: {review.review}</li>
+              <li>Posted: {review.created_at.toLocaleString("en-GB")}</li>
+              <div className={gameStyles.review_buttons_container}>
+                <Link
+                  className={`button ${gameStyles.button}`}
+                  href={`/games/${params.id}/editReview?reviewID=${review.id}&title=${game.rows[0].title}`}
+                >
+                  Edit
+                </Link>
+                <DeleteReviewButton reviewID={review.id} />
+              </div>
             </div>
           ))
         )}
       </ul>
-      <Link className={`button ${gamesStyles.review_button}`} href={`/games/${params.id}/addReview`}>
+      <Link className={`button ${gameStyles.review_button}`} href={`/games/${params.id}/addReview?title=${game.rows[0].title}`}>
         Add a Review
       </Link>
       <Link className="button" href={`/games`}>

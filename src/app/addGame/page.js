@@ -2,6 +2,8 @@ import { sql } from "@vercel/postgres";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import formStyles from "@/styles/form.module.css";
+import FormSubmitButton from "@/components/FormSubmitButton";
+import CategorySelect from "@/components/CategorySelect";
 
 export default async function AddGame() {
   async function handleSaveGame(formData) {
@@ -45,18 +47,7 @@ export default async function AddGame() {
         <label className="subheading" htmlFor="category">
           Category
         </label>
-        <select id="category" name="category" required>
-          <option value="Action">Action</option>
-          <option value="Adventure">Adventure</option>
-          <option value="Platformer">Platformer</option>
-          <option value="Puzzle">Puzzle</option>
-          <option value="Racing">Racing</option>
-          <option value="RPG">RPG</option>
-          <option value="Shooter">Shooter</option>
-          <option value="Simulation">Simulation</option>
-          <option value="Sport">Sport</option>
-          <option value="Strategy">Strategy</option>
-        </select>
+        <CategorySelect />
 
         <label className="subheading" htmlFor="release_date">
           Release Date
@@ -71,10 +62,7 @@ export default async function AddGame() {
         </label>
         <input id="cover_image" name="cover_image" type="url" placeholder="URL to the game's cover image" required />
 
-        <button className="button" type="submit">
-          Submit
-        </button>
-        {/*<SaveGameButton className="p-3" />*/}
+        <FormSubmitButton />
       </form>
     </div>
   );

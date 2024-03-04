@@ -16,8 +16,27 @@
   }
 }
 
+*::-webkit-scrollbar {
+  width: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: white;
+  border-radius: 8px;
+  border: 2px solid white;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  cursor: pointer;
+}
+
 body {
-  background: linear-gradient(90deg, #a00000, #c62128);
+  background: linear-gradient(90deg, #300000, #780000);
   color: white;
   display: flex;
   flex-direction: column;
@@ -71,7 +90,7 @@ body {
 }
 
 .button {
-  background-color: rgb(159, 0, 0, 0.5);
+  background-color: rgba(180, 0, 0, 0.5);
   border: 2px solid white;
   border-radius: 8px;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
