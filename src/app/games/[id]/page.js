@@ -5,16 +5,18 @@ import gameStyles from "@/styles/game.module.css";
 import DeleteReviewButton from "@/components/DeleteReviewButton";
 
 export default async function Reviews({ params }) {
+  const gameID = params.id;
+
   const game = await sql`
-    SELECT * FROM games WHERE id = ${params.id}
+    SELECT * FROM games WHERE id = ${gameID}
   ;`;
 
   const reviews = await sql`
-    SELECT * FROM reviews WHERE game_id = ${params.id}
+    SELECT * FROM reviews WHERE game_id = ${gameID}
   ;`;
 
   let averageRating = await sql`
-    SELECT ROUND(AVG(rating), 1) AS average_rating FROM reviews WHERE game_id = ${params.id}
+    SELECT ROUND(AVG(rating), 1) AS average_rating FROM reviews WHERE game_id = ${gameID}
   ;`;
 
   // Check if game with given ID exists
@@ -67,17 +69,17 @@ export default async function Reviews({ params }) {
               <div className={gameStyles.review_buttons_container}>
                 <Link
                   className={`button ${gameStyles.button}`}
-                  href={`/games/${params.id}/addReview?edit=true&reviewID=${review.id}&title=${game.rows[0].title}`}
+                  href={`/games/${gameID}/addReview?edit=true&reviewID=${review.id}&title=${game.rows[0].title}`}
                 >
                   Edit
                 </Link>
-                <DeleteReviewButton reviewID={review.id} />
+                <DeleteReviewButton reviewID={review.id} gameID={gameID} />
               </div>
             </div>
           ))
         )}
       </ul>
-      <Link className={`button ${gameStyles.review_button}`} href={`/games/${params.id}/addReview?edit=false&title=${game.rows[0].title}`}>
+      <Link className={`button ${gameStyles.review_button}`} href={`/games/${gameID}/addReview?edit=false&title=${game.rows[0].title}`}>
         Add a Review
       </Link>
       <Link className="button" href={`/games?category=All`}>
