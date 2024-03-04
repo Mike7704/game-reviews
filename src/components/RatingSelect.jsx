@@ -1,6 +1,15 @@
-export default function RatingSelect() {
+"use client";
+import { useState } from "react";
+
+export default function RatingSelect({ option }) {
+  const [selectedOption, setSelectedOption] = useState(option);
+
+  const handleChange = (e) => {
+    setSelectedOption(e.target.value);
+  };
+
   return (
-    <select id="rating" name="rating" required>
+    <select id="rating" name="rating" value={selectedOption} onChange={handleChange} required>
       <option value="10">10</option>
       <option value="9">9</option>
       <option value="8">8</option>
