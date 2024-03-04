@@ -81,9 +81,7 @@ export default async function AddReview({ searchParams, params }) {
         <label className="subheading" htmlFor="review">
           Review
         </label>
-        <textarea id="review" name="review" placeholder="Give your review here" required>
-          {currentReviewComment}
-        </textarea>
+        <textarea id="review" name="review" placeholder="Give your review here" defaultValue={currentReviewComment} required></textarea>
 
         <FormSubmitButton />
       </form>
