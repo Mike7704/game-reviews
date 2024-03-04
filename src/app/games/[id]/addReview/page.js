@@ -32,7 +32,7 @@ export default async function AddReview({ searchParams, params }) {
       return (
         <div className="page-content">
           <h1 className="heading">Review Not Found</h1>
-          <Link className="button" href={`/games`}>
+          <Link className="button" href={`/games?category=All`}>
             Back
           </Link>
         </div>

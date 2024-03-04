@@ -8,7 +8,7 @@ export default function NavBar() {
         <Link className="button" href="/">
           Home
         </Link>
-        <Link className="button" href="/games">
+        <Link className="button" href="/games?category=All">
           Games
         </Link>
         <Link className="button" href="/addGame">

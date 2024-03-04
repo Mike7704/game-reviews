@@ -22,7 +22,7 @@ export default async function Reviews({ params }) {
     return (
       <div className="page-content">
         <h1 className="heading">Game Not Found</h1>
-        <Link className="button" href={`/games`}>
+        <Link className="button" href={`/games?category=All`}>
           Back
         </Link>
       </div>
@@ -80,7 +80,7 @@ export default async function Reviews({ params }) {
       <Link className={`button ${gameStyles.review_button}`} href={`/games/${params.id}/addReview?edit=false&title=${game.rows[0].title}`}>
         Add a Review
       </Link>
-      <Link className="button" href={`/games`}>
+      <Link className="button" href={`/games?category=All`}>
         Back
       </Link>
     </div>

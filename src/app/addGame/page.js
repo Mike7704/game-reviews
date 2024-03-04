@@ -27,7 +27,7 @@ export default async function AddGame() {
     revalidatePath(`/games`);
 
     // Redirect the user to the games page
-    redirect(`/games`);
+    redirect(`/games?category=All`);
   }
 
   return (
