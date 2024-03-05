@@ -56,6 +56,7 @@
   display: flex;
   justify-content: space-between;
   gap: 20px;
+  flex-wrap: wrap;
 }
 
 .button {
@@ -71,8 +72,9 @@
   .game_cover {
     display: none;
   }
-  .game_buttons_container {
-    flex-direction: column;
+  .game_description {
+    max-height: 80px;
+    overflow-y: auto;
   }
   .button {
     width: auto;
