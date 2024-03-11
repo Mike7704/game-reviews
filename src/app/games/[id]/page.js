@@ -1,4 +1,5 @@
 import { sql } from "@vercel/postgres";
+import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import gameStyles from "@/styles/game.module.css";
@@ -6,29 +7,29 @@ import DeleteReviewButton from "@/components/DeleteReviewButton";
 
 export default async function Reviews({ params }) {
   const gameID = params.id;
+  let game;
+  let reviews;
+  let averageRating;
 
-  const game = await sql`
+  try {
+    game = await sql`
     SELECT * FROM games WHERE id = ${gameID}
-  ;`;
+    ;`;
 
-  const reviews = await sql`
-    SELECT * FROM reviews WHERE game_id = ${gameID}
-  ;`;
+    reviews = await sql`
+      SELECT * FROM reviews WHERE game_id = ${gameID}
+    ;`;
 
-  let averageRating = await sql`
-    SELECT ROUND(AVG(rating), 1) AS average_rating FROM reviews WHERE game_id = ${gameID}
-  ;`;
+    averageRating = await sql`
+      SELECT ROUND(AVG(rating), 1) AS average_rating FROM reviews WHERE game_id = ${gameID}
+    ;`;
+  } catch (error) {
+    throw new Error("Could not load reviews");
+  }
 
   // Check if game with given ID exists
   if (game.rows[0] === null || game.rows[0] === undefined) {
-    return (
-      <div className="page-content">
-        <h1 className="heading">Game Not Found</h1>
-        <Link className="button" href={`/games?category=All`}>
-          Back
-        </Link>
-      </div>
-    );
+    notFound();
   }
 
   // Check if there are any reviews to display an average

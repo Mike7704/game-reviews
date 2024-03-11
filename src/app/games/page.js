@@ -6,9 +6,15 @@ import DeleteGameButton from "@/components/DeleteGameButton";
 import CategoryFilter from "@/components/CategoryFilter";
 
 export default async function Games({ searchParams }) {
-  const games = await sql`
-    SELECT * FROM games;
-  `;
+  let games;
+
+  try {
+    games = await sql`
+      SELECT * FROM games;
+    `;
+  } catch (error) {
+    throw new Error("Could not fetch games");
+  }
 
   // Filter games by category
   const filteredGames = games.rows.filter((game) => {

@@ -17,11 +17,15 @@ export default async function AddGame() {
     const category = formData.get("category");
     const cover_image = formData.get("cover_image");
 
-    // Insert new game
-    await sql`INSERT INTO games (title, description, release_date, category, cover_image)
+    try {
+      // Insert new game
+      await sql`INSERT INTO games (title, description, release_date, category, cover_image)
       VALUES
       (${title}, ${description}, ${release_date}, ${category}, ${cover_image})
-    `;
+      `;
+    } catch (error) {
+      throw new Error("Could not add game");
+    }
 
     // Revalidate the games page to fetch most recent data
     revalidatePath(`/games`);

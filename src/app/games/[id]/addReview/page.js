@@ -1,6 +1,7 @@
 import { sql } from "@vercel/postgres";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
+import { notFound } from "next/navigation";
 import Link from "next/link";
 import formStyles from "@/styles/form.module.css";
 import FormSubmitButton from "@/components/FormSubmitButton";
@@ -29,14 +30,7 @@ export default async function AddReview({ searchParams, params }) {
 
     // Check review exists to edit
     if (reviewData.rows[0] === null || reviewData.rows[0] === undefined) {
-      return (
-        <div className="page-content">
-          <h1 className="heading">Review Not Found</h1>
-          <Link className="button" href={`/games?category=All`}>
-            Back
-          </Link>
-        </div>
-      );
+      notFound();
     }
     // Populate form with current review data
     else {
@@ -81,7 +75,7 @@ export default async function AddReview({ searchParams, params }) {
         <label className="subheading" htmlFor="review">
           Review
         </label>
-        <textarea id="review" name="review" placeholder="Give your review here" defaultValue={currentReviewComment} required></textarea>
+        <textarea id="review" name="review" placeholder="Write your review here" defaultValue={currentReviewComment} required></textarea>
 
         <FormSubmitButton />
       </form>

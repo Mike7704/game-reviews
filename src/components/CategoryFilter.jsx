@@ -4,7 +4,7 @@ import gamesListStyles from "@/styles/gamesList.module.css";
 export default function RatingSelect() {
   return (
     <div className={gamesListStyles.filter_container}>
-      <p>Category Filter:</p>
+      <p>Category:</p>
       <Link className={`button ${gamesListStyles.category_button}`} href={`/games?category=All`}>
         All
       </Link>
